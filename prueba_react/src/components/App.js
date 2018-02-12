@@ -1,34 +1,39 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import * as routes from '../constants/routes';
 import logo from '../assets/logo.svg';
 import '../assets/App.css';
-import UserList from "./UserList";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import LandingPage from './LandingPage';
+import HomePage from './HomePage';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 class App extends Component {
-    constructor(){
-        super();
-        this.state = {
-            users: [
-                {id:1, name: "Yo xd", ip: "192.168.1.1"},
-                {id:2, name: "Raquel supongo", ip:"192.168.1.2"}
-            ]
-        };
-    }
 
-  render() {
-    return (
-        <MuiThemeProvider>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-          <UserList users={this.state.users}/>
-      </div>
-        </MuiThemeProvider>
-    );
-  }
+
+    render() {
+        return (
+            <Router>
+                {/*<MuiThemeProvider>*/}
+                    <div className="App">
+                        <header className="App-header">
+                            <img src={logo} className="App-logo" alt="logo"/>
+                            <h1 className="App-title">Welcome to React</h1>
+                        </header>
+                        <br/>
+                        <Route
+                            exact path={routes.LANDING}
+                            component={LandingPage}
+                        />
+                        <Route
+                            exact path={routes.HOME}
+                            component={()=><HomePage/>}
+                        />
+                    </div>
+                {/*</MuiThemeProvider>*/}
+            </Router>
+        );
+    }
 }
 
 export default App;

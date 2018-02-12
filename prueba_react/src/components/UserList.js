@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import User from "./User";
 import List from 'material-ui/List';
+
+
 class UserList extends Component {
     render() {
         return (
-            <List>
+            <List style={{maxWidth:"50%",margin:"0 auto"}}>
                 {this.props.users.map(user => {
                     return(
                         <User
@@ -12,10 +14,7 @@ class UserList extends Component {
                             name={user.name}
                             ip={user.ip}
                         />
-
-
                     )
-
                 })}
             </List>
         );
