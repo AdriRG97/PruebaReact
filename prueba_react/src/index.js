@@ -15,5 +15,7 @@ firebase.initializeApp({
     messagingSenderId: "705486705650"
 });
 
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

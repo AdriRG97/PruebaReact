@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import * as routes from '../constants/routes';
 import logo from '../assets/logo.svg';
 import '../assets/App.css';
 import LandingPage from './LandingPage';
+import firebase from 'firebase';
+
 import HomePage from './HomePage';
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -23,11 +25,23 @@ class App extends Component {
                         <br/>
                         <Route
                             exact path={routes.LANDING}
-                            component={LandingPage}
+                            render={function () {
+                                if (firebase.auth().currentUser !== null) {
+                                    return <Redirect to={routes.HOME}/>
+                                } else {
+                                    return <LandingPage/>
+                                }
+                            }}
                         />
                         <Route
                             exact path={routes.HOME}
-                            component={()=><HomePage/>}
+                            render={function () {
+                                if (firebase.auth().currentUser === null) {
+                                    return <Redirect to={routes.LANDING}/>
+                                } else {
+                                    return <HomePage/>
+                                }
+                            }}
                         />
                     </div>
                 {/*</MuiThemeProvider>*/}
